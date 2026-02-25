@@ -23,6 +23,7 @@ connectDB();
 const allowedOrigins = [
   'http://localhost:5173',
   process.env.CLIENT_URL,
+  'https://syncsphere-l3qa.onrender.com',
 ].filter(Boolean);
 
 app.use(cors({
