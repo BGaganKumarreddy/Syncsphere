@@ -1,0 +1,520 @@
+@import "tailwindcss";
+
+/* ─── Custom Keyframe Animations ─────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.03);
+  }
+}
+
+@keyframes floatReverse {
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 6px rgba(99, 102, 241, 0.25);
+  }
+}
+
+@keyframes pulseDot {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Animation Utility Classes ──────────────────────────────────────────── */
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.45s ease forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.animate-pulse-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+/* Initial hidden state for staggered animations */
+.opacity-0-init {
+  opacity: 0;
+}
+
+/* ─── Scrollbar Styling ───────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6);
+}
+
+/* ─── Theme Variables ────────────────────────────────────────────────────── */
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  /* Light Theme */
+  :root {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+  }
+
+  /* Dark Theme */
+  .dark {
+    --bg-main: #020617;
+    --bg-card: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #1e293b;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
+}
+
+/* ─── Light Mode Overrides ───────────────────────────────────────────────────
+   Feature pages hard-code dark Tailwind classes (bg-slate-950, text-white …).
+   When the .light class is on <html>, we remap every dark token to its
+   light-mode equivalent so every page looks great without rewriting each file.
+────────────────────────────────────────────────────────────────────────────── */
+
+/* Page / section backgrounds */
+.light .bg-slate-950 {
+  background-color: #f1f5f9 !important;
+}
+
+.light .bg-slate-900 {
+  background-color: #ffffff !important;
+}
+
+.light .bg-slate-800 {
+  background-color: #f8fafc !important;
+}
+
+.light .bg-slate-700 {
+  background-color: #e2e8f0 !important;
+}
+
+.light .bg-slate-600 {
+  background-color: #cbd5e1 !important;
+}
+
+/* Opacity variants */
+.light .bg-slate-900\/60 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.light .bg-slate-900\/40 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.light .bg-slate-800\/60 {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+.light .bg-slate-800\/50 {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+
+.light .bg-slate-800\/40 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+.light .bg-slate-700\/60 {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* Text colors */
+.light .text-white {
+  color: #1e293b !important;
+}
+
+.light .text-slate-200 {
+  color: #334155 !important;
+}
+
+.light .text-slate-300 {
+  color: #475569 !important;
+}
+
+.light .text-slate-400 {
+  color: #64748b !important;
+}
+
+.light .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.light .text-slate-600 {
+  color: #64748b !important;
+}
+
+/* Borders */
+.light .border-slate-800 {
+  border-color: #e2e8f0 !important;
+}
+
+.light .border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+
+.light .border-slate-600 {
+  border-color: #94a3b8 !important;
+}
+
+/* Opacity border variants */
+.light .border-slate-800\/40 {
+  border-color: rgba(226, 232, 240, 0.7) !important;
+}
+
+.light .border-slate-700\/60 {
+  border-color: rgba(203, 213, 225, 0.8) !important;
+}
+
+.light .border-slate-700\/50 {
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+
+/* Inputs & form elements */
+.light input:not([type="checkbox"]):not([type="radio"]),
+.light textarea,
+.light select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.light input:disabled,
+.light textarea:disabled {
+  background-color: #f1f5f9 !important;
+  color: #94a3b8 !important;
+}
+
+/* Focus ring */
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: #6366f1 !important;
+  outline: none;
+}
+
+/* Card / panel hover backgrounds */
+.light .hover\:bg-slate-800:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.light .hover\:bg-slate-700:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.light .hover\:bg-slate-900\/40:hover {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+/* Slate hover text */
+.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+.light .hover\:text-slate-200:hover {
+  color: #1e293b !important;
+}
+
+.light .hover\:text-slate-300:hover {
+  color: #334155 !important;
+}
+
+/* Keep accent / brand colors untouched (indigo, violet, emerald, rose, amber, sky)
+   — they are consistently readable on light backgrounds.
+   Only re-adjust background opacity overrides of brand colors where needed. */
+.light .bg-indigo-900\/20 {
+  background-color: rgba(238, 242, 255, 0.8) !important;
+}
+
+.light .bg-indigo-900\/40 {
+  background-color: rgba(224, 231, 255, 0.9) !important;
+}
+
+.light .border-indigo-800\/40 {
+  border-color: rgba(165, 180, 252, 0.6) !important;
+}
+
+.light .text-indigo-300 {
+  color: #4f46e5 !important;
+}
+
+.light .text-indigo-400 {
+  color: #6366f1 !important;
+}
+
+.light .bg-violet-900\/60 {
+  background-color: rgba(245, 243, 255, 0.85) !important;
+}
+
+.light .text-violet-300 {
+  color: #7c3aed !important;
+}
+
+.light .text-violet-400 {
+  color: #8b5cf6 !important;
+}
+
+.light .bg-emerald-900\/20 {
+  background-color: rgba(236, 253, 245, 0.85) !important;
+}
+
+.light .border-emerald-800\/40 {
+  border-color: rgba(110, 231, 183, 0.5) !important;
+}
+
+.light .text-emerald-300 {
+  color: #059669 !important;
+}
+
+.light .text-emerald-400 {
+  color: #10b981 !important;
+}
+
+.light .bg-red-900\/20 {
+  background-color: rgba(255, 241, 242, 0.85) !important;
+}
+
+.light .border-red-900\/50 {
+  border-color: rgba(252, 165, 165, 0.7) !important;
+}
+
+.light .bg-amber-900\/15 {
+  background-color: rgba(255, 251, 235, 0.9) !important;
+}
+
+.light .border-amber-800\/30 {
+  border-color: rgba(251, 191, 36, 0.4) !important;
+}
+
+.light .text-amber-300 {
+  color: #d97706 !important;
+}
+
+.light .text-amber-400 {
+  color: #f59e0b !important;
+}
+
+.light .bg-sky-900\/20 {
+  background-color: rgba(240, 249, 255, 0.85) !important;
+}
+
+.light .border-sky-800\/50 {
+  border-color: rgba(125, 211, 252, 0.5) !important;
+}
+
+.light .text-sky-300 {
+  color: #0284c7 !important;
+}
+
+.light .bg-blue-900\/20 {
+  background-color: rgba(239, 246, 255, 0.85) !important;
+}
+
+.light .border-blue-800\/50 {
+  border-color: rgba(147, 197, 253, 0.5) !important;
+}
+
+.light .text-blue-300 {
+  color: #2563eb !important;
+}
+
+.light .bg-purple-900\/20 {
+  background-color: rgba(250, 245, 255, 0.85) !important;
+}
+
+.light .border-purple-800\/50 {
+  border-color: rgba(196, 181, 253, 0.5) !important;
+}
+
+.light .text-purple-300 {
+  color: #7c3aed !important;
+}
+
+/* Tooltip dark pill (sidebar collapsed state) */
+.light .bg-slate-800.dark\:bg-slate-700,
+.light [class*="bg-slate-800"] .text-white {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Scrollbar in light mode */
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.45);
+}

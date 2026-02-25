@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Environment variables (NEVER commit — add real values on Render)
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

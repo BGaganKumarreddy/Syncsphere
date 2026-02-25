@@ -1,0 +1,6 @@
+/* App-level overrides — Vite defaults removed */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
