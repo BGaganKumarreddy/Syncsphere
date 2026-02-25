@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth, ROLES } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 
 export default function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState(ROLES.MEMBER);
     const [loading, setLoading] = useState(false);
     const { register } = useAuth();
     const { addToast } = useToast();
@@ -23,7 +22,7 @@ export default function Signup() {
 
         try {
             setLoading(true);
-            await register(name, email, password, role);
+            await register(name, email, password);
             addToast('Account created successfully!', 'success');
             navigate('/dashboard');
         } catch (error) {
@@ -86,28 +85,7 @@ export default function Signup() {
                     />
                 </div>
 
-                {/* Role */}
-                <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">
-                        Select Role <span className="text-slate-600">(Demo)</span>
-                    </label>
-                    <div className="grid grid-cols-3 gap-2">
-                        {Object.values(ROLES).map((r) => (
-                            <button
-                                key={r}
-                                type="button"
-                                onClick={() => setRole(r)}
-                                className={`px-3 py-2 text-xs font-semibold rounded-lg border transition-all duration-200
-                                    ${role === r
-                                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-500/25'
-                                        : 'bg-slate-800/60 text-slate-400 border-slate-700 hover:border-slate-500 hover:text-slate-300 hover:-translate-y-0.5'
-                                    }`}
-                            >
-                                {r}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+
 
                 {/* Submit */}
                 <button
