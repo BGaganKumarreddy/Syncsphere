@@ -123,7 +123,7 @@ docker-compose -f docker-compose.prod.yml up -d
 4. Add environment variables
 5. Deploy
 
-**Deployment URL:** `https://<service-name>.onrender.com`
+**Deployment URL:** [https://syncsphere-kjy6.onrender.com](https://syncsphere-kjy6.onrender.com)
 
 ### Deploy Frontend
 
@@ -133,10 +133,41 @@ docker-compose -f docker-compose.prod.yml up -d
   - Build Command: `npm run build`
   - Output Directory: `dist`
 
+## 🏛️ System Architecture
+
+SyncSphere follows a modern containerized microservices-like architecture designed for seamless scalability, local container parity, and easy cloud deployments.
+
+### 🐳 Local Development Architecture (Docker Compose)
+In local development, both services run within an isolated Docker virtual network (`syncsphere-network`). The frontend uses an Nginx reverse proxy to forward `/api/*` traffic to the backend, preventing CORS complications.
+
+```mermaid
+graph TD
+    User([User Browser]) -->|Accesses Port 3000| Nginx[Frontend: Nginx Container]
+    Nginx -->|Serves Static Files| User
+    Nginx -->|Proxy Pass /api/*| Express[Backend: Node/Express Container]
+    Express -->|Port 5000 / API Responses| Nginx
+    Express -->|Mongoose Queries| MongoDB[(MongoDB Atlas Cloud)]
+    
+    subgraph Local Docker Compose Environment
+        Nginx
+        Express
+    end
+```
+
+### ☁️ Production Cloud Deployment Architecture
+In production, the backend is containerized/built on Render and connects to a MongoDB Atlas cluster. The frontend is built and deployed as a fast static site on Vercel, querying the public Render URL.
+
+```mermaid
+graph LR
+    User([User Browser]) -->|Accesses static site| Vercel[Vercel Frontend Host]
+    User -->|Direct HTTP API Calls| Render[Render Backend Service]
+    Render -->|Queries| MongoDB[(MongoDB Atlas Cloud)]
+```
+
 ## 📚 Documentation
 
 For comprehensive documentation, see:
-- [**DEPLOYMENT.md**](./DEPLOYMENT.md) - Complete deployment guide with Docker, Render setup, troubleshooting, and architecture diagrams
+- [**DOCKER.md**](./DOCKER.md) - Docker commands reference guide for starting, stopping, and debugging containers.
 
 ## 📁 Project Structure
 
