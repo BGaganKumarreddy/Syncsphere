@@ -1,0 +1,21 @@
+# Git
+.git
+.gitignore
+
+# Environment
+.env.local
+.env.*.local
+.DS_Store
+
+# IDEs
+.vscode
+.idea
+*.swp
+*.swo
+
+# Dependencies
+node_modules
+
+# Build artifacts
+dist
+build

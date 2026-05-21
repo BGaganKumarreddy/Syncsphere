@@ -1,4 +1,8 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+let BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+// Normalize BASE_URL: remove trailing slash and ensure it ends with `/api`
+if (BASE_URL.endsWith('/')) BASE_URL = BASE_URL.slice(0, -1);
+if (!BASE_URL.endsWith('/api')) BASE_URL = `${BASE_URL}/api`;
 
 const getToken = () => {
     const user = localStorage.getItem('authUser');

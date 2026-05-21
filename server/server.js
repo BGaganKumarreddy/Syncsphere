@@ -46,6 +46,11 @@ app.use('/api/teams', teamRoutes);
 app.use('/api/invites', inviteRoutes);
 app.use('/api/messages', messageRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to SyncSphere API!', status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });

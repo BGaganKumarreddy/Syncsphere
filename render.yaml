@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: syncsphere-backend
+    runtime: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+    healthCheckPath: /
+    autoDeploy: false
+
+  - type: web
+    name: syncsphere-frontend
+    runtime: node
+    buildCommand: cd client && npm install && npm run build
+    startCommand: cd client && npx http-server dist -p 3000
+    envVars:
+      - key: VITE_API_URL
+        value: ${SYNCSPHERE_BACKEND_URL}
+    healthCheckPath: /
+    autoDeploy: false
